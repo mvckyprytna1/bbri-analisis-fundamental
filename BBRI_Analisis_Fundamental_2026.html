@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analisis Fundamental BBRI — Juni 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0e0c0a;
+    --surface: #161310;
+    --surface2: #1e1a16;
+    --border: #2a2420;
+    --text: #d8d0c8;
+    --text-dim: #6b6058;
+    --accent: #e8a043;
+    --green: #4caf7d;
+    --red: #e05252;
+    --yellow: #e8c43a;
+    --orange: #e8733a;
+    --blue: #4a9eff;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14.5px;
+    line-height: 1.75;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+  }
+  .header-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .header-sub {
+    color: var(--text-dim);
+    font-size: 13px;
+    font-family: var(--mono);
+  }
+  .disclaimer-top {
+    margin-top: 16px;
+    padding: 10px 14px;
+    background: rgba(232,160,67,0.06);
+    border-left: 3px solid var(--accent);
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  h2 {
+    font-size: 11px;
+    font-family: var(--mono);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 48px 0 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 24px 0 10px;
+  }
+  p { margin-bottom: 12px; color: var(--text); }
+
+  .rating-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .rating-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 16px;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .rating-card .label {
+    font-size: 11px;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .rating-card .score {
+    font-size: 28px;
+    font-weight: 700;
+    font-family: var(--mono);
+  }
+  .score.high { color: var(--green); }
+  .score.med { color: var(--yellow); }
+  .score.low { color: var(--red); }
+  .score.warn { color: var(--orange); }
+
+  .verdict {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin: 8px 0;
+  }
+  .verdict.buy { background: rgba(76,175,125,0.15); color: var(--green); border: 1px solid rgba(76,175,125,0.3); }
+  .verdict.hold { background: rgba(232,196,58,0.15); color: var(--yellow); border: 1px solid rgba(232,196,58,0.3); }
+  .verdict.avoid { background: rgba(224,82,82,0.15); color: var(--red); border: 1px solid rgba(224,82,82,0.3); }
+  .verdict.specbuy { background: rgba(232,115,58,0.15); color: var(--orange); border: 1px solid rgba(232,115,58,0.3); }
+
+  .tbl-wrap { overflow-x: auto; margin: 16px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    font-family: var(--mono);
+  }
+  th {
+    background: var(--surface2);
+    color: var(--accent);
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .num { text-align: right; }
+  .pos { color: var(--green); }
+  .neg { color: var(--red); }
+  .warn { color: var(--yellow); }
+  .orng { color: var(--orange); }
+
+  ul { padding-left: 18px; margin-bottom: 12px; }
+  li { margin-bottom: 6px; }
+  li.green::marker { color: var(--green); }
+  li.red::marker { color: var(--red); }
+  li.yellow::marker { color: var(--yellow); }
+  li.orange::marker { color: var(--orange); }
+
+  .box {
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin: 16px 0;
+    border-left: 3px solid;
+  }
+  .box.green { background: rgba(76,175,125,0.06); border-color: var(--green); }
+  .box.red { background: rgba(224,82,82,0.06); border-color: var(--red); }
+  .box.yellow { background: rgba(232,196,58,0.06); border-color: var(--yellow); }
+  .box.orange { background: rgba(232,115,58,0.06); border-color: var(--orange); }
+  .box.blue { background: rgba(74,158,255,0.06); border-color: var(--blue); }
+  .box .box-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .box.green .box-title { color: var(--green); }
+  .box.red .box-title { color: var(--red); }
+  .box.yellow .box-title { color: var(--yellow); }
+  .box.orange .box-title { color: var(--orange); }
+  .box.blue .box-title { color: var(--blue); }
+
+  .scenario-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 16px 0; }
+  .scenario-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 16px;
+    border-radius: 6px;
+  }
+  .scenario-card .s-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .scenario-card.bear .s-label { color: var(--red); }
+  .scenario-card.base .s-label { color: var(--yellow); }
+  .scenario-card.bull .s-label { color: var(--green); }
+  .scenario-card .s-price {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: var(--mono);
+    margin-bottom: 10px;
+  }
+  .scenario-card.bear .s-price { color: var(--red); }
+  .scenario-card.base .s-price { color: var(--yellow); }
+  .scenario-card.bull .s-price { color: var(--green); }
+  .scenario-card ul { padding-left: 14px; font-size: 12px; }
+
+  .stress-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .stress-row:last-child { border-bottom: none; }
+  .stress-label { flex: 1; color: var(--text-dim); }
+  .stress-impact { width: 140px; text-align: right; font-family: var(--mono); font-weight: 600; }
+  .stress-verdict { width: 160px; text-align: right; }
+  .stress-verdict span {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-family: var(--mono);
+  }
+  .sv-ok { background: rgba(76,175,125,0.15); color: var(--green); }
+  .sv-warn { background: rgba(232,196,58,0.15); color: var(--yellow); }
+  .sv-bad { background: rgba(224,82,82,0.15); color: var(--red); }
+  .sv-ugly { background: rgba(232,115,58,0.15); color: var(--orange); }
+
+  .checklist-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .checklist-item:last-child { border-bottom: none; }
+  .ci-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .ci-text { color: var(--text); }
+
+  .src {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    background: rgba(232,160,67,0.1);
+    color: var(--accent);
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+
+  .compare-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-family: var(--mono);
+    background: rgba(74,158,255,0.1);
+    color: var(--blue);
+    margin-left: 6px;
+  }
+
+  .footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-dim);
+    font-family: var(--mono);
+  }
+
+  @media (max-width: 600px) {
+    .scenario-grid { grid-template-columns: 1fr; }
+    .rating-grid { grid-template-columns: repeat(2,1fr); }
+    .stress-verdict { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-tag">Analisis Fundamental Saham — IDX · Bank BUMN</div>
+  <h1>PT Bank Rakyat Indonesia (Persero) Tbk<br><span style="color:var(--accent)">BBRI</span></h1>
+  <div class="header-sub">Analisis per 8 Juni 2026 · Harga penutupan: Rp2.600/lembar · Bursa Efek Indonesia</div>
+  <div class="disclaimer-top">⚠ Analisis ini menggunakan data real berdasarkan laporan keuangan resmi dan sumber media keuangan terpercaya. Bukan ajakan beli/jual. Data yang tidak tersedia dinyatakan secara eksplisit.</div>
+</div>
+
+
+<!-- SECTION 1 -->
+<h2>01 — Ringkasan Eksekutif</h2>
+
+<p>BBRI adalah bank dengan aset terbesar di Indonesia (Rp2.249 triliun per Q1 2026), penyalur kredit UMKM terbesar di Asia Tenggara, dan saham dengan jumlah pemegang saham terbanyak di BEI. Ini bukan bank yang sedang kolaps — ini bank yang sedang <strong>dihantam krisis dari semua sisi sekaligus</strong>: daya beli UMKM merosot, NPL merayap naik, capital outflow asing menekan valuasi, dan payout dividen 92% dari laba 2025 membuat buffer pertumbuhan mengecil. Di Rp2.600, BBRI diperdagangkan di PBV ~1,1–1,2x dan PER ~7,x — level yang historis menjadi titik pembelian ekstrem, tapi bukan tanpa risiko nyata.</p>
+
+<div class="box red">
+  <div class="box-title">⚠ Kejujuran yang Harus Disampaikan</div>
+  BBRI punya masalah fundamental yang tidak selesai dalam 1–2 kuartal: NPL UMKM struktural tinggi (3,3%), segmen inti (mikro) yang tertekan oleh daya beli, dan Cost of Credit yang masih di ujung atas panduan (3,2%). Ini bukan krisis eksistensial, tapi ini bukan "buy dan lupakan" juga. Investor harus matang memahami risiko UMKM cycle sebelum masuk.
+</div>
+
+<div class="rating-grid">
+  <div class="rating-card">
+    <div class="label">Fundamental</div>
+    <div class="score med">7/10</div>
+  </div>
+  <div class="rating-card">
+    <div class="label">Risiko</div>
+    <div class="score warn">6/10</div>
+    <div style="font-size:10px;color:var(--text-dim);margin-top:4px">(tinggi = berisiko)</div>
+  </div>
+  <div class="rating-card">
+    <div class="label">Prospek 5 Tahun</div>
+    <div class="score med">7/10</div>
+  </div>
+  <div class="rating-card">
+    <div class="label">Ketahanan Krisis</div>
+    <div class="score med">6.5/10</div>
+  </div>
+  <div class="rating-card">
+    <div class="label">Kelayakan Investasi</div>
+    <div class="score med">7/10</div>
+  </div>
+</div>
+
+<div style="margin-top:16px">
+  <span class="verdict specbuy">SPECULATIVE BUY / ACCUMULATE</span>
+  <span style="margin-left:12px;font-size:13px;color:var(--text-dim)">jangka panjang — risiko lebih tinggi dari BBCA, return potensi lebih besar</span>
+</div>
+
+
+<!-- SECTION 2 -->
+<h2>02 — Profil Perusahaan</h2>
+
+<div class="tbl-wrap">
+<table>
+  <tr><th>Kategori</th><th>Detail</th></tr>
+  <tr><td>Nama Resmi</td><td>PT Bank Rakyat Indonesia (Persero) Tbk</td></tr>
+  <tr><td>Kode Saham</td><td>BBRI (IDX)</td></tr>
+  <tr><td>Tahun Berdiri</td><td>16 Desember 1895 (Badan Rumah Tabungan + Priyayi, Purwokerto)</td></tr>
+  <tr><td>IPO</td><td>10 November 2003 di BEI</td></tr>
+  <tr><td>Pemegang Saham Pengendali</td><td>Danantara (holding BUMN) + Pemerintah RI: ~53,19% saham <span class="src">BBRI Press Release 2025</span></td></tr>
+  <tr><td>Direktur Utama</td><td>Hery Gunardi (efektif 2026, menggantikan Sunarso)</td></tr>
+  <tr><td>Klasifikasi OJK</td><td>KBMI 4 (Bank dengan Modal Inti di atas Rp70 T)</td></tr>
+  <tr><td>Total Aset Q1 2026</td><td>Rp2.249 triliun (+7,2% YoY) <span class="src">Kontan, Apr 2026</span></td></tr>
+  <tr><td>Total Kredit Q1 2026</td><td>Rp1.562 triliun (+13,7% YoY)</td></tr>
+  <tr><td>Jumlah Pemegang Saham</td><td>653.251 (terbanyak di BEI) <span class="src">StockTitan, Jan 2025</span></td></tr>
+  <tr><td>Jumlah Karyawan</td><td>±80.170 <span class="src">Trading Economics</span></td></tr>
+</table>
+</div>
+
+<h3>Anak Usaha & Ekosistem Bisnis Kunci</h3>
+<ul>
+  <li><strong>Holding Ultra Mikro (UMi)</strong> — ekosistem paling unik BRI: BRI + Pegadaian + PNM. Jangkauan nasabah ultra mikro terbesar di Indonesia. Inilah moat sesungguhnya.</li>
+  <li><strong>BRI Insurance</strong> — asuransi umum</li>
+  <li><strong>BRI Life</strong> — asuransi jiwa</li>
+  <li><strong>BRI Ventura Investama</strong> — modal ventura</li>
+  <li><strong>BRImo</strong> — super-app digital banking (31,6 juta pengguna aktif per Maret 2025)</li>
+  <li><strong>BRI Danareksa Sekuritas</strong> — sekuritas (bergabung via BRI Manajemen Investasi)</li>
+  <li><strong>AgenBRILink</strong> — lebih dari 500.000 agen branchless banking di seluruh Indonesia</li>
+  <li><strong>Bank Raya</strong> — bank digital anak BRI</li>
+</ul>
+
+<p><strong>Posisi di industri:</strong> BRI adalah <em>bank aset terbesar</em> Indonesia, melampaui BCA, Mandiri, dan BNI secara total aset. Namun dari sisi profitabilitas bersih, BCA masih unggul karena NIM BRI lebih rendah dari BCA secara keseluruhan pada level bank-only. BRI adalah pemimpin segmen UMKM yang tidak tertandingi — bukan hanya di Indonesia, tapi di Asia Tenggara.</p>
+
+
+<!-- SECTION 3 -->
+<h2>03 — Sejarah & Perjalanan Bisnis</h2>
+
+<div class="tbl-wrap">
+<table>
+  <tr><th>Tahun</th><th>Tonggak Penting</th></tr>
+  <tr><td>1895</td><td>Didirikan sebagai Hulp-en Spaarbank der Inlandsche Hoofden (Bank Tabungan) di Purwokerto oleh Raden Bei Aria Wirjaatmadja. Bank tertua yang masih beroperasi di Indonesia.</td></tr>
+  <tr><td>1946</td><td>Ditetapkan sebagai Bank Pemerintah pertama Republik Indonesia pasca kemerdekaan.</td></tr>
+  <tr><td>1946–2000</td><td>Ekspansi jaringan nasional. Menjadi tulang punggung pembiayaan pertanian dan usaha kecil di pedesaan. Basis pedesaan ini membentuk DNA BRI hingga kini.</td></tr>
+  <tr><td>2003</td><td>IPO di BEI. Merupakan langkah korporatisasi besar. Pemerintah melepas sebagian kepemilikan ke publik.</td></tr>
+  <tr><td>2010–2019</td><td>Ekspansi masif: jaringan BRI Unit (kantor mikro) terbesar di Indonesia, AgenBRILink dimulai, laba tumbuh konsisten. Transformasi dari "bank desa" menjadi "bank semua segmen dengan core UMKM."</td></tr>
+  <tr><td>2020</td><td>COVID-19 memukul keras segmen UMKM. Laba turun signifikan ke Rp18,7 T (bank only). NPL melonjak. Restrukturisasi kredit COVID besar-besaran.</td></tr>
+  <tr><td>2021</td><td>Pembentukan Holding Ultra Mikro (UMi): BRI + Pegadaian + PNM. Rights issue Rp41 triliun untuk pembiayaan. Ini momen transformasional terbesar BRI dalam 20 tahun.</td></tr>
+  <tr><td>2022</td><td>Pasca pandemi: kredit bangkit, laba melonjak +67% YoY ke Rp51,4 T. Normalisasi besar-besaran.</td></tr>
+  <tr><td>2023–2024</td><td>Laba stagnan di Rp60 T (2023: Rp60,1 T; 2024: Rp60,6 T). NPL turun tapi pelan. Cost of Credit tinggi menjadi beban utama.</td></tr>
+  <tr><td>2025</td><td>Laba turun ke Rp56,65 T (-5,5%). Provisi melonjak. NPL naik ke 3,07% akhir tahun. Dividen 92% dari laba — rekor sejarah.</td></tr>
+  <tr><td>2026</td><td>Q1: Laba Rp15,5 T (+13,7% YoY). Kredit tumbuh 13,7%. NPL 3,31% naik dari 3,07%. Harga saham di Rp2.600 — terendah sejak 2020.</td></tr>
+</table>
+</div>
+
+<div class="box orange">
+  <div class="box-title">Catatan Perjalanan Bisnis</div>
+  BRI pernah melewati krisis 1998, pandemi 2020, dan lonjakan NPL UMKM pasca restrukturisasi COVID. Setiap kali, BRI bertahan karena dukungan pemerintah dan posisinya sebagai infrastruktur keuangan nasional yang tidak tergantikan. Pertumbuhan organik, bukan akuisisi korporasi agresif. Tapi hati-hati: holding UMi dibentuk lewat rights issue Rp41 T (dilutif) — pertumbuhan tidak sepenuhnya gratis.
+</div>
+
+
+<!-- SECTION 4 -->
+<h2>04 — Model Bisnis</h2>
+
+<h3>Dari Mana BRI Menghasilkan Uang?</h3>
+<ul>
+  <li><strong>Net Interest Income (NII) — ~73% pendapatan:</strong> BRI meminjamkan ke UMKM/mikro dengan bunga tinggi (12–24% per tahun untuk segmen mikro), sementara biaya dana CASA-nya jauh lebih rendah. NIM 8,2% di Q1 2026 adalah yang tertinggi di antara 4 bank KBMI-4. Ini adalah <em>keunggulan utama</em>.</li>
+  <li><strong>Fee-based income (komisi, bancassurance, transaksi):</strong> ~20% pendapatan. Tumbuh melalui BRImo dan ekosistem digital.</li>
+  <li><strong>Ekosistem Holding UMi (Pegadaian + PNM):</strong> Jangkauan ke segmen di bawah bankable. NIM Pegadaian sangat tinggi (gadai emas dll). Ini diversifikasi pendapatan yang unik.</li>
+</ul>
+
+<h3>Pelanggan Utama & Karakteristik Bisnis</h3>
+<ul>
+  <li>82% kredit disalurkan ke UMKM. Pelanggan adalah pedagang kecil, petani, nelayan, buruh, pengusaha warung — segmen yang paling sensitif terhadap gejolak ekonomi.</li>
+  <li>Pendapatan berulang — bunga cicilan bulanan dari jutaan debitur.</li>
+  <li>Sulit ditiru: jaringan AgenBRILink 500.000+ dan BRI Unit di pedesaan adalah infrastruktur yang membutuhkan puluhan tahun untuk dibangun. FinTech tidak bisa masuk ke sini dengan mudah.</li>
+  <li><strong>Ketergantungan kritis pada daya beli UMKM:</strong> Ini moat sekaligus Achilles' heel. Ketika daya beli melemah (seperti sekarang), NPL naik dan laba tertekan.</li>
+</ul>
+
+<div class="box red">
+  <div class="box-title">⚠ Kelemahan Struktural yang Harus Dipahami</div>
+  Model bisnis BRI yang bergantung pada segmen mikro menghasilkan NIM tinggi, tapi juga NPL tinggi secara struktural (3–4% versus BBCA yang 1,7–1,9%). Ini bukan kesalahan manajemen — ini sifat bawaan segmen. Saat krisis menekan daya beli, BRI lebih terdampak daripada BBCA karena pelanggannya lebih rentan.
+</div>
+
+
+<!-- SECTION 5 -->
+<h2>05 — Analisis Industri</h2>
+
+<p>Kondisi industri perbankan 2026 sudah dibahas di analisis BBCA. Yang unik untuk BRI: segmen UMKM mengalami tekanan tersendiri. <span class="src">OJK, April 2026</span> menyoroti potensi kenaikan NPL UMKM akibat daya beli yang merosot dan perlambatan ekonomi di sektor riil. NPL UMKM industri meningkat di atas rata-rata perbankan.</p>
+
+<p>Yang membedakan BRI dari kompetitor: KUR (Kredit Usaha Rakyat) dengan plafon Rp308,41 triliun untuk 2026 — BRI sebagai penyalur terbesar (sudah Rp31,42 T per Feb 2026). Program KUR adalah <em>privilege yang diberikan negara kepada BRI</em> dan tidak bisa ditiru kompetitor swasta.</p>
+
+<div class="tbl-wrap">
+<table>
+  <tr><th>Aspek</th><th>BRI (BBRI)</th><th>BCA (BBCA)</th><th>Bank Mandiri (BMRI)</th></tr>
+  <tr><td>Fokus segmen</td><td>UMKM/Mikro (82%)</td><td>Korporasi + Ritel premium</td><td>Korporasi + Wholesale</td></tr>
+  <tr><td>NIM</td><td class="pos">8,2%</td><td class="warn">5,4%</td><td class="warn">~5,8%</td></tr>
+  <tr><td>NPL Gross</td><td class="neg">3,31%</td><td class="pos">1,8%</td><td class="warn">~2%</td></tr>
+  <tr><td>CASA Ratio</td><td class="warn">68,1%</td><td class="pos">85,2%</td><td class="warn">~75%</td></tr>
+  <tr><td>ROE</td><td class="warn">18,4%</td><td class="pos">25,1%</td><td class="warn">~20%</td></tr>
+  <tr><td>Cost of Credit</td><td class="neg">3,2%</td><td class="pos">~0,6%</td><td class="warn">~1,0%</td></tr>
+  <tr><td>PBV (Jun 2026)</td><td class="pos">~1,1–1,2x</td><td class="warn">~2,4x</td><td class="pos">~1,3x</td></tr>
+  <tr><td>Dividen Yield</td><td class="pos">~16% @ Rp2.600</td><td class="pos">~5,9%</td><td class="warn">~8%</td></tr>
+</table>
+</div>
+<p style="font-size:12px;color:var(--text-dim)">Sumber: Laporan keuangan Q1 2026 masing-masing perusahaan, Bareksa, Stockbro.id</p>
+
+
+<!-- SECTION 6 -->
+<h2>06 — Analisis Laporan Keuangan (2020–Q1 2026)</h2>
+
+<h3>A. Ringkasan Data Keuangan Konsolidasi</h3>
+<div class="tbl-wrap">
+<table>
+  <tr>
+    <th>Indikator</th>
+    <th class="num">2020</th>
+    <th class="num">2021</th>
+    <th class="num">2022</th>
+    <th class="num">2023</th>
+    <th class="num">2024</th>
+    <th class="num">2025</th>
+    <th class="num">Q1 2026</th>
+  </tr>
+  <tr>
+    <td>Total Aset (Rp T)</td>
+    <td class="num">~1.511</td>
+    <td class="num">~1.678</td>
+    <td class="num">~1.865</td>
+    <td class="num">~1.965</td>
+    <td class="num">1.993</td>
+    <td class="num">~2.098</td>
+    <td class="num pos">2.249</td>
+  </tr>
+  <tr>
+    <td>Total Kredit (Rp T)</td>
+    <td class="num">~982</td>
+    <td class="num">~1.072</td>
+    <td class="num">~1.190</td>
+    <td class="num">~1.266</td>
+    <td class="num">1.354,6</td>
+    <td class="num">~1.373</td>
+    <td class="num pos">1.562</td>
+  </tr>
+  <tr>
+    <td>Kredit UMKM (Rp T / %)</td>
+    <td class="num">—</td>
+    <td class="num">—</td>
+    <td class="num">—</td>
+    <td class="num">—</td>
+    <td class="num">1.110,4 (82%)</td>
+    <td class="num">~1.151 (80%)</td>
+    <td class="num">1.211 (78%)</td>
+  </tr>
+  <tr>
+    <td>DPK (Rp T)</td>
+    <td class="num">—</td>
+    <td class="num">—</td>
+    <td class="num">—</td>
+    <td class="num">—</td>
+    <td class="num">1.365,5</td>
+    <td class="num">~1.422</td>
+    <td class="num">1.555</td>
+  </tr>
+  <tr>
+    <td>CASA Ratio</td>
+    <td class="num">—</td>
+    <td class="num">—</td>
+    <td class="num">—</td>
+    <td class="num">~64%</td>
+    <td class="num">67,3%</td>
+    <td class="num warn">—</td>
+    <td class="num">68,1%</td>
+  </tr>
+  <tr>
+    <td>NII (Rp T)</td>
+    <td class="num">~88</td>
+    <td class="num">~97</td>
+    <td class="num">~115</td>
+    <td class="num">137,4</td>
+    <td class="num">142,1</td>
+    <td class="num warn">~140 est.</td>
+    <td class="num">40,2*</td>
+  </tr>
+  <tr>
+    <td>Laba Bersih (Rp T)</td>
+    <td class="num neg">~18,7</td>
+    <td class="num">~25,1</td>
+    <td class="num pos">51,4</td>
+    <td class="num pos">60,1</td>
+    <td class="num warn">60,6</td>
+    <td class="num neg">56,65</td>
+    <td class="num pos">15,5*</td>
+  </tr>
+  <tr>
+    <td>Laba YoY (%)</td>
+    <td class="num neg">-53%</td>
+    <td class="num pos">+34%</td>
+    <td class="num pos">+105%</td>
+    <td class="num pos">+17%</td>
+    <td class="num warn">+0,9%</td>
+    <td class="num neg">-6,5%</td>
+    <td class="num pos">+13,7%</td>
+  </tr>
+</table>
+</div>
+<p style="font-size:12px;color:var(--text-dim)">*Q1 2026 adalah quarterly. Sumber: Annual Report BRI 2024 (ir-bri.com), Kontan Apr 2026, Indopremier Feb 2026, GoodStats 2025, Bisnis.com Feb 2025.</p>
+
+<div class="box orange">
+  <div class="box-title">⚠ Analisis Kritis Tren Laba</div>
+  Laba BRI stagnan di Rp60 T selama 2 tahun (2023–2024), lalu turun di 2025. Ini bukan tren yang baik untuk bank "pertumbuhan". Penyebab utama stagnansi adalah: (1) lonjakan beban pencadangan (provisi) yang menjadi "penghambat tersembunyi" pertumbuhan laba meski NII masih tumbuh, dan (2) NIM yang terkompresi dari high-for-longer. <strong>Kualitas laba BRI perlu dipertanyakan:</strong> NII tumbuh tapi provisi "memakan" pertumbuhan tersebut. Di Q1 2026, laba kembali tumbuh 13,7% — ini sinyal positif yang perlu diverifikasi 2-3 kuartal ke depan.
+</div>
+
+<h3>B–D. Margin & Profitabilitas</h3>
+<div class="tbl-wrap">
+<table>
+  <tr>
+    <th>Rasio</th>
+    <th class="num">2021</th>
+    <th class="num">2022</th>
+    <th class="num">2023</th>
+    <th class="num">2024</th>
+    <th class="num">2025</th>
+    <th class="num">Q1 2026</th>
+  </tr>
+  <tr>
+    <td>Net Profit Margin</td>
+    <td class="num">~21%</td>
+    <td class="num">~27%</td>
+    <td class="num">~31%</td>
+    <td class="num warn">~30%</td>
+    <td class="num warn">27,3%</td>
+    <td class="num">~29%*</td>
+  </tr>
+  <tr>
+    <td>NIM</td>
+    <td class="num pos">~6,5%</td>
+    <td class="num pos">~7,9%</td>
+    <td class="num pos">~8,3%</td>
+    <td class="num pos">~8,5%</td>
+    <td class="num warn">7,8%</td>
+    <td class="num pos">8,2%</td>
+  </tr>
+  <tr>
+    <td>ROA</td>
+    <td class="num warn">1,56%</td>
+    <td class="num">2,93%</td>
+    <td class="num">3,28%</td>
+    <td class="num">3,06%</td>
+    <td class="num warn">~2,7%</td>
+    <td class="num warn">2,8%</td>
+  </tr>
+  <tr>
+    <td>ROE</td>
+    <td class="num warn">10,5%</td>
+    <td class="num">16,9%</td>
+    <td class="num">19,3%</td>
+    <td class="num">19,0%</td>
+    <td class="num warn">~16,5%</td>
+    <td class="num warn">18,4%</td>
+  </tr>
+  <tr>
+    <td>NPL Gross</td>
+    <td class="num neg">3,08%</td>
+    <td class="num warn">2,67%</td>
+    <td class="num warn">2,95%</td>
+    <td class="num warn">2,78%</td>
+    <td class="num neg">3,07%</td>
+    <td class="num neg">3,31%</td>
+  </tr>
+  <tr>
+    <td>Cost of Credit (CoC)</td>
+    <td class="num neg">~3,8%</td>
+    <td class="num warn">~2,6%</td>
+    <td class="num warn">~2,7%</td>
+    <td class="num warn">~3,3%</td>
+    <td class="num neg">~3,1%</td>
+    <td class="num warn">3,2%</td>
+  </tr>
+  <tr>
+    <td>CAR</td>
+    <td class="num pos">21,8%</td>
+    <td class="num pos">23,3%</td>
+    <td class="num pos">25,0%</td>
+    <td class="num pos">26,6%</td>
+    <td class="num pos">~21,6%</td>
+    <td class="num pos">~22%</td>
+  </tr>
+</table>
+</div>
+<p style="font-size:12px;color:var(--text-dim)">Sumber: Annual Report BRI 2024 (ir-bri.com), BRI Lapkeu Q1 2025 (ir-bri.com/pdf), Bareksa, Kontan, Indopremier 2025–2026.</p>
+
+<p><strong>NIM 8,2% adalah kelebihan struktural BRI</strong> yang membedakannya dari bank lain — ini mencerminkan premium bunga dari segmen mikro. Namun Cost of Credit 3,2% adalah "pajak" dari NIM tinggi tersebut. Net-net: BRI menghasilkan margin bersih yang lebih rendah dari BBCA karena harus menyisihkan lebih banyak untuk cadangan kredit macet.</p>
+
+<p><strong>ROE 18,4%</strong> masih baik tapi jauh di bawah BBCA (25%). Untuk bank sebesar ini dengan aset Rp2.249 T, ROE 18% adalah wajar tapi bukan istimewa.</p>
+
+<h3>E. Likuiditas dan Solvabilitas Bank</h3>
+<div class="tbl-wrap">
+<table>
+  <tr><th>Indikator</th><th class="num">Q1 2026</th><th>Penilaian</th></tr>
+  <tr><td>CAR (Capital Adequacy Ratio)</td><td class="num pos">~22% (Tier 1 naik 15,2%)</td><td class="pos">✓ Di atas minimum regulator, tapi lebih rendah dari BBCA (30%)</td></tr>
+  <tr><td>LDR (Loan to Deposit Ratio)</td><td class="num warn">87,66%</td><td class="warn">⚠ Tinggi. Ruang pertumbuhan kredit lebih terbatas dari BBCA (74%)</td></tr>
+  <tr><td>NPL Coverage</td><td class="num pos">~180%</td><td class="pos">✓ Cadangan masih 1,8x NPL — memadai</td></tr>
+  <tr><td>LAR Coverage</td><td class="num warn">~55%</td><td class="warn">⚠ Lebih rendah. LAR 9,7% = Rp152 T kredit berisiko, coverage 55% tidak setebal BBCA</td></tr>
+  <tr><td>LAR (Loan at Risk)</td><td class="num neg">9,7% (membaik dari 11,1% di Q4 2025)</td><td class="neg">⚠ Rp152 T kredit berisiko — ini angka absolut yang besar</td></tr>
+  <tr><td>CASA Ratio</td><td class="num warn">68,1%</td><td class="warn">Solid tapi jauh dari BBCA (85%). CoF BRI lebih tinggi.</td></tr>
+  <tr><td>Cost of Fund (CoF)</td><td class="num pos">2,3% (turun dari 3%)</td><td class="pos">✓ Penurunan CoF sangat positif — ini yang mendorong NIM dan laba Q1 2026</td></tr>
+</table>
+</div>
+
+
+<!-- SECTION 7 -->
+<h2>07 — Analisis Rasio Keuangan</h2>
+
+<div class="tbl-wrap">
+<table>
+  <tr><th>Rasio</th><th class="num">Nilai Saat Ini</th><th class="num">Vs Kompetitor</th><th>Kesimpulan</th></tr>
+  <tr>
+    <td>ROA</td>
+    <td class="num warn">2,8%</td>
+    <td class="num"><span class="compare-badge">BBCA: 4,1%</span></td>
+    <td class="warn">Cukup baik untuk bank besar, tapi di bawah BBCA. ROA 2,8% untuk aset Rp2.249 T = laba Rp63 T annualized — tapi aktual Q1 2026 diannualisasi cuma ~Rp62 T.</td>
+  </tr>
+  <tr>
+    <td>ROE</td>
+    <td class="num warn">18,4%</td>
+    <td class="num"><span class="compare-badge">BBCA: 25,1%</span></td>
+    <td class="warn">Masih solid. Tapi turun dari 19% di 2024 dan 23% di 2023. Tren menurun perlu diperhatikan.</td>
+  </tr>
+  <tr>
+    <td>NIM</td>
+    <td class="num pos">8,2%</td>
+    <td class="num"><span class="compare-badge">BBCA: 5,4%</span></td>
+    <td class="pos">Tertinggi di KBMI-4. Refleksi premium kredit mikro. Ini kekuatan nyata BRI.</td>
+  </tr>
+  <tr>
+    <td>NPL Gross</td>
+    <td class="num neg">3,31%</td>
+    <td class="num"><span class="compare-badge">BBCA: 1,8%</span></td>
+    <td class="neg">⚠ Naik dari 2,78% (2024) dan 3,07% (2025). Tren memburuk. Ini risiko terbesar BRI.</td>
+  </tr>
+  <tr>
+    <td>Cost of Credit</td>
+    <td class="num neg">3,2%</td>
+    <td class="num"><span class="compare-badge">BBCA: ~0,6%</span></td>
+    <td class="neg">Beda 5,4x lipat dari BBCA. Setiap 1% kredit yang macet = Rp15,6 T kerugian potensial. Ini "silent killer" profitabilitas BRI.</td>
+  </tr>
+  <tr>
+    <td>CIR (Cost to Income)</td>
+    <td class="num warn">~42%</td>
+    <td class="num"><span class="compare-badge">BBCA: ~31%</span></td>
+    <td class="warn">Lebih mahal dari BBCA. Tapi membaik dari 73,7% (Q1 2025) ke tingkat yang jauh lebih wajar.</td>
+  </tr>
+  <tr>
+    <td>LDR</td>
+    <td class="num neg">87,66%</td>
+    <td class="num"><span class="compare-badge">BBCA: 74,1%</span></td>
+    <td class="neg">LDR tinggi = leverage tinggi = buffer likuiditas lebih tipis. Pertumbuhan kredit ke depan lebih terbatas.</td>
+  </tr>
+</table>
+</div>
+
+<h3>Valuasi (Harga Rp2.600 per 8 Juni 2026)</h3>
+<div class="tbl-wrap">
+<table>
+  <tr><th>Metrik</th><th class="num">BBRI saat ini</th><th class="num">Historis</th><th>Kesimpulan</th></tr>
+  <tr>
+    <td>PER (Price/Earnings)</td>
+    <td class="num pos">~6,9–7,0x</td>
+    <td class="num">10–15x</td>
+    <td class="pos">Murah secara historis. Bahkan di tengah laba yang tertekan.</td>
+  </tr>
+  <tr>
+    <td>PBV (Price/Book Value)</td>
+    <td class="num pos">~1,1–1,2x</td>
+    <td class="num">2,0–3,0x</td>
+    <td class="pos">Jauh di bawah mean historis. Mendekati book value — level krisis.</td>
+  </tr>
+  <tr>
+    <td>Dividend Yield (2025)</td>
+    <td class="num pos">~16%</td>
+    <td class="num">5–8%</td>
+    <td class="pos">Tertinggi dalam sejarah BBRI. Tapi yield setinggi ini mencerminkan harga yang sangat tertekan, bukan hanya kedermawanan.</td>
+  </tr>
+  <tr>
+    <td>EPS Annualized 2026</td>
+    <td class="num">~Rp380–400</td>
+    <td class="num">Rp398 (2024)</td>
+    <td class="warn">Jika recovery berlanjut, bisa melampaui 2024.</td>
+  </tr>
+</table>
+</div>
+<p>Sumber: Stockbro.id Jun 2026 (PER 7,76x, PBV 1,34x), Pluang.com Mei 2026, Samuel Sekuritas Mar 2026.</p>
+
+<div class="box yellow">
+  <div class="box-title">⚠ Peringatan Valuasi</div>
+  PBV 1,1–1,2x terlihat sangat murah, tapi untuk bank dengan NPL 3,3% dan CoC 3,2%, "book value" harus didiskon untuk risiko kredit yang belum di-provision. Jika LAR 9,7% (Rp152 T) memburuk lebih jauh, book value riil bisa lebih rendah dari yang tercatat. Ini yang membedakan "murah karena undervalued" vs "murah karena berisiko."
+</div>
+
+
+<!-- SECTION 8 -->
+<h2>08 — Analisis Utang & Risiko Gagal Bayar</h2>
+
+<div class="tbl-wrap">
+<table>
+  <tr><th>Faktor</th><th>Kondisi BRI</th><th>Penilaian</th></tr>
+  <tr>
+    <td>Sumber pendanaan utama</td>
+    <td>68,1% CASA, sisanya deposito dan obligasi</td>
+    <td class="warn">⚠ CASA 68% solid tapi jauh di bawah BBCA (85%). CoF lebih mahal.</td>
+  </tr>
+  <tr>
+    <td>CAR</td>
+    <td>~22% — di atas minimum regulator OJK (~14%)</td>
+    <td class="warn">⚠ Cukup kuat, tapi turun dari puncak 26,6% (2024). Tren perlu dipantau.</td>
+  </tr>
+  <tr>
+    <td>Ekuitas total</td>
+    <td>Rp345,06 triliun (Q1 2026, +12,8% YoY)</td>
+    <td class="pos">✓ Ekuitas tumbuh solid</td>
+  </tr>
+  <tr>
+    <td>LDR 87,7%</td>
+    <td>Hampir mendekati batas nyaman industri ~90%</td>
+    <td class="neg">⚠ Ruang ekspansi kredit terbatas. Jika DPK tidak tumbuh, BRI tidak bisa tumbuh kredit agresif.</td>
+  </tr>
+  <tr>
+    <td>Risiko utang valas</td>
+    <td>BRI punya eksposur valas dari obligasi yang diterbitkan dan kredit korporasi. Sebagai BUMN, ada backing implisit pemerintah.</td>
+    <td class="warn">⚠ Rupiah di Rp18.000+ mempengaruhi debitur yang punya utang atau bahan baku valas</td>
+  </tr>
+  <tr>
+    <td>Risiko gagal bayar bank</td>
+    <td>Sebagai bank BUMN dengan backing negara + CAR 22%, risiko gagal bayar institusional sangat rendah. Pemerintah tidak akan biarkan BRI kolaps.</td>
+    <td class="pos">✓ Sangat kecil</td>
+  </tr>
+  <tr>
+    <td>Payout dividen 92% dari laba 2025</td>
+    <td>Rp52,1 triliun dibayarkan — hampir semua laba. Buffer pertumbuhan internal sangat tipis.</td>
+    <td class="neg">⚠ Ini sinyal bahwa manajemen (dan Danantara/pemerintah) mengutamakan cash extraction dari BRI. Jangka panjang bisa menghambat pertumbuhan organik.</td>
+  </tr>
+</table>
+</div>
+
+<div class="box red">
+  <div class="box-title">Red Flag: Dividen 92% dari Laba</div>
+  Membayar 92% dari laba sebagai dividen saat NPL sedang naik dan kualitas kredit membutuhkan buffer adalah keputusan yang <em>kontroversial secara manajemen risiko</em>. Ini menguntungkan pemegang saham jangka pendek (termasuk Danantara/pemerintah) tapi mengurangi kemampuan BRI untuk memperkuat modal organik. CAR BRI yang turun dari 26,6% ke 22% perlu dipantau erat.
+</div>
+
+
+<!-- SECTION 9 -->
+<h2>09 — Manajemen & Tata Kelola</h2>
+
+<div class="tbl-wrap">
+<table>
+  <tr><th>Aspek</th><th>Kondisi</th><th>Penilaian</th></tr>
+  <tr>
+    <td>Pemegang saham pengendali</td>
+    <td>Danantara + Pemerintah RI: ~53,19%. Publik: ~46,81%</td>
+    <td class="warn">⚠ Danantara adalah entitas baru yang kurang transparan. Potensi konflik kepentingan antara target fiskal pemerintah vs kepentingan komersial bank.</td>
+  </tr>
+  <tr>
+    <td>Direktur Utama</td>
+    <td>Hery Gunardi (2026). Sebelumnya: Sunarso (2019–2025)</td>
+    <td class="warn">⚠ Pergantian CEO bisa bawa perubahan strategi. Perlu dipantau eksekusi 2026.</td>
+  </tr>
+  <tr>
+    <td>Risiko interferensi pemerintah</td>
+    <td>Sebagai BUMN, BRI wajib melaksanakan program pemerintah (KUR, FLPP, bansos) yang tidak selalu komersial optimal</td>
+    <td class="neg">⚠ Ini risiko nyata yang tidak ada di BBCA. Program KUR yang margin-nya disubsidi pemerintah bisa membatasi optimalisasi NIM.</td>
+  </tr>
+  <tr>
+    <td>Kepindahan aset ke Danantara</td>
+    <td>Saham BRI-MI (BRI Manajemen Investasi) dan PNM-IM (PNM Investasi Manajemen) dialihkan ke Danantara</td>
+    <td class="neg">⚠ Pengalihan aset ke Danantara mengurangi kontrol BRI atas ekosistem. Perlu dipantau.</td>
+  </tr>
+  <tr>
+    <td>Isu hukum</td>
+    <td>Tidak ada suspensi, gagal bayar, atau skandal akuntansi material yang tercatat</td>
+    <td class="pos">✓ Bersih dari sisi hukum dan akuntansi</td>
+  </tr>
+  <tr>
+    <td>Dividen untuk publik</td>
+    <td>Konsisten membayar dividen. Payout 92% di 2025 adalah yang tertinggi sepanjang sejarah.</td>
+    <td class="pos">✓ Ramah investor dalam jangka pendek</td>
+  </tr>
+</table>
+</div>
+
+
+<!-- SECTION 10 -->
+<h2>10 — Analisis Dividen</h2>
+
+<div class="tbl-wrap">
+<table>
+  <tr><th>Tahun Buku</th><th class="num">Laba Bersih</th><th class="num">Total Dividen</th><th class="num">Payout Ratio</th><th class="num">DPS</th><th class="num">Yield @ Rp2.600</th></tr>
+  <tr><td>2022</td><td class="num">Rp51,4 T</td><td class="num">Rp43,9 T</td><td class="num">85%</td><td class="num">Rp288</td><td class="num warn">~11,1%*</td></tr>
+  <tr><td>2023</td><td class="num">Rp60,1 T</td><td class="num">~Rp48 T</td><td class="num">~80%</td><td class="num">~Rp319</td><td class="num">—</td></tr>
+  <tr><td>2024</td><td class="num">Rp60,6 T</td><td class="num">Rp48,9 T*</td><td class="num">~81%</td><td class="num">Rp418*</td><td class="num pos">~16% @ Rp2.600</td></tr>
+  <tr><td>2025 (interim)</td><td class="num">Rp56,65 T</td><td class="num">Rp52,1 T</td><td class="num neg">92%</td><td class="num">Rp137+Rp207=Rp344</td><td class="num pos">~13,2% @ Rp2.600</td></tr>
+</table>
+</div>
+<p style="font-size:12px;color:var(--text-dim)">*Sumber: Investortrust.id, Pluang.com Mei 2026, StockTitan Jan 2025. Yield dihitung berdasarkan harga Rp2.600. DPS 2024 dikonfirmasi Pluang Rp418/saham.</p>
+
+<div class="box red">
+  <div class="box-title">⚠ Dividend Yield 13–16%: Terlalu Indah untuk Tidak Diwaspadai</div>
+  Yield setinggi ini bukan karena BRI tiba-tiba murah hati. Ini adalah kombinasi: (1) harga saham yang ambles 40%+ dari puncak, dan (2) payout ratio yang dipaksakan sangat tinggi (92%). Dividen yang diambil dari 92% laba saat NPL sedang naik adalah <strong>sinyal bahwa Danantara/pemerintah butuh cash dari BRI</strong>, bukan karena bisnis sangat sehat. Investor harus memahami bahwa payout 92% tidak berkelanjutan jika laba terus turun.
+</div>
+
+<p><strong>Keberlanjutan dividen 2026:</strong> Dengan panduan manajemen payout 80–90% dan laba Q1 2026 annualized ~Rp62 T, dividen 2026 diperkirakan Rp320–360 per saham. Yield ~12–14% pada harga Rp2.600 — masih sangat tinggi, tapi tidak dijamin.</p>
+
+
+<!-- SECTION 11 -->
+<h2>11 — Analisis Valuasi</h2>
+
+<div class="tbl-wrap">
+<table>
+  <tr><th>Metode Valuasi</th><th class="num">Asumsi</th><th class="num">Fair Value</th></tr>
+  <tr><td>PBV Mean Historis (2,0x)</td><td class="num">Book Value ~Rp2.200/saham</td><td class="num pos">~Rp4.400</td></tr>
+  <tr><td>PBV Konservatif (1,5x)</td><td class="num">Diskon untuk NPL dan CoC tinggi</td><td class="num">~Rp3.300</td></tr>
+  <tr><td>PER Mean Historis (11x)</td><td class="num">EPS annualized Rp380–400</td><td class="num pos">~Rp4.200–4.400</td></tr>
+  <tr><td>Konsensus Analis (21 analis)</td><td class="num">Target median Rp4.250</td><td class="num pos">Rp4.250 <span class="src">Pluang.com</span></td></tr>
+  <tr><td>Samuel Sekuritas Target</td><td class="num">PBV 2x untuk 2026</td><td class="num pos">Rp4.400 <span class="src">Samuel Mar 2026</span></td></tr>
+  <tr><td>Ciptadana Sekuritas Target</td><td class="num">Buy outlook</td><td class="num pos">Rp4.800 <span class="src">Bareksa Apr 2026</span></td></tr>
+</table>
+</div>
+
+<h3>Tiga Skenario</h3>
+<div class="scenario-grid">
+  <div class="scenario-card bear">
+    <div class="s-label">⚠ Bear Case</div>
+    <div class="s-price">Rp2.000–2.500</div>
+    <ul>
+      <li>NPL naik ke 4–5% karena UMKM terus memburuk</li>
+      <li>Provisi melonjak, laba turun 20–30%</li>
+      <li>Rupiah melemah lebih jauh (Rp20.000+)</li>
+      <li>Pemerintah potong plafon KUR</li>
+      <li>PBV 0,9–1,0x (distressed valuation)</li>
+      <li>Downside 4–23% dari Rp2.600</li>
+    </ul>
+  </div>
+  <div class="scenario-card base">
+    <div class="s-label">📊 Base Case</div>
+    <div class="s-price">Rp3.300–4.000</div>
+    <ul>
+      <li>Ekonomi tumbuh 4–4,5%</li>
+      <li>NPL stabil 3,0–3,5%</li>
+      <li>NIM stabil 7,5–8,0%</li>
+      <li>Laba 2026: Rp60–65 T</li>
+      <li>PBV rerating ke 1,5–1,8x dalam 12–18 bulan</li>
+      <li>Upside 27–54% dari Rp2.600</li>
+    </ul>
+  </div>
+  <div class="scenario-card bull">
+    <div class="s-label">🚀 Bull Case</div>
+    <div class="s-price">Rp4.400–5.000</div>
+    <ul>
+      <li>Rupiah menguat ke Rp15.000–16.000</li>
+      <li>NPL turun ke 2,5% — daya beli pulih</li>
+      <li>CoC turun ke 2,0%, laba melesat ke Rp70+ T</li>
+      <li>Holding UMi mengakselerasi pendapatan</li>
+      <li>PBV rerating ke 2,0–2,3x</li>
+      <li>Upside 69–92% dari Rp2.600</li>
+    </ul>
+  </div>
+</div>
+
+<p><strong>Margin of Safety:</strong> Di Rp2.600 (PBV 1,1x), margin of safety terhadap base case adalah 27–54%. Terhadap book value (~Rp2.200), premium hanya 18% — hampir di book value. Ini sangat langka untuk bank terbesar Indonesia.</p>
+
+
+<!-- SECTION 12 -->
+<h2>12 — Analisis Krisis & Stress Test</h2>
+
+<h3>Dampak Krisis Makro terhadap BRI</h3>
+<div class="tbl-wrap">
+<table>
+  <tr><th>Faktor Krisis</th><th>Dampak Langsung ke BRI</th><th>Tingkat Dampak</th></tr>
+  <tr>
+    <td>Rupiah Rp18.000+</td>
+    <td>UMKM yang bergantung bahan baku impor (pedagang, industri kecil) kesulitan. NPL UMKM berpotensi naik. BRI paling terekspos di antara 4 bank KBMI-4.</td>
+    <td class="neg">TINGGI</td>
+  </tr>
+  <tr>
+    <td>Daya beli masyarakat merosot</td>
+    <td>Ini adalah risiko eksistensial bagi model bisnis BRI. UMKM adalah kelompok paling rapuh saat daya beli turun — omzet turun, cicilan macet, NPL naik.</td>
+    <td class="neg">SANGAT TINGGI</td>
+  </tr>
+  <tr>
+    <td>Capital outflow Rp69,5 T</td>
+    <td>BRI punya kepemilikan asing ~20,74%. Jual asing berkelanjutan menekan harga saham. BBRI sudah turun ~40% dari puncak.</td>
+    <td class="neg">TINGGI (harga saham)</td>
+  </tr>
+  <tr>
+    <td>Inflasi input usaha UMKM</td>
+    <td>Bahan baku naik, margin usaha UMKM mengecil, kemampuan bayar cicilan turun. Efek langsung ke kredit macet BRI.</td>
+    <td class="neg">TINGGI</td>
+  </tr>
+  <tr>
+    <td>Harga minyak $100+</td>
+    <td>Nelayan, petani, transportasi (segmen BRI) terdampak biaya BBM. Langsung ke daya bayar debitur.</td>
+    <td class="warn">SEDANG–TINGGI</td>
+  </tr>
+  <tr>
+    <td>Cuaca ekstrem, gagal panen</td>
+    <td>Petani dan nelayan adalah kelompok besar debitur BRI. Gagal panen = gagal bayar kredit pertanian.</td>
+    <td class="warn">SEDANG</td>
+  </tr>
+</table>
+</div>
+
+<h3>Stress Test Simulasi</h3>
+<div class="stress-row">
+  <div class="stress-label">Revenue (NII) turun 10%</div>
+  <div class="stress-impact warn">Laba ~Rp50–54 T</div>
+  <div class="stress-verdict"><span class="sv-warn">TERTEKAN</span></div>
+</div>
+<div class="stress-row">
+  <div class="stress-label">Revenue (NII) turun 20%</div>
+  <div class="stress-impact neg">Laba ~Rp40–44 T</div>
+  <div class="stress-verdict"><span class="sv-ugly">TERTEKAN BERAT</span></div>
+</div>
+<div class="stress-row">
+  <div class="stress-label">Revenue (NII) turun 30%</div>
+  <div class="stress-impact neg">Laba ~Rp30–35 T</div>
+  <div class="stress-verdict"><span class="sv-bad">RENTAN — Dividen dipangkas</span></div>
+</div>
+<div class="stress-row">
+  <div class="stress-label">NPL naik ke 5% (dari 3,31%)</div>
+  <div class="stress-impact neg">Provisi extra +Rp26 T — laba bisa 0 atau negatif</div>
+  <div class="stress-verdict"><span class="sv-bad">SANGAT BERBAHAYA</span></div>
+</div>
+<div class="stress-row">
+  <div class="stress-label">NIM turun 100 bps ke 7,2%</div>
+  <div class="stress-impact warn">Laba turun ~Rp15 T</div>
+  <div class="stress-verdict"><span class="sv-ugly">TERTEKAN BERAT</span></div>
+</div>
+<div class="stress-row">
+  <div class="stress-label">CoC naik ke 4% (dari 3,2%)</div>
+  <div class="stress-impact neg">Provisi extra +Rp12 T — laba turun ~20%</div>
+  <div class="stress-verdict"><span class="sv-bad">RENTAN</span></div>
+</div>
+<div class="stress-row">
+  <div class="stress-label">Rupiah ke Rp20.000/$</div>
+  <div class="stress-impact neg">NPL UMKM akselerasi, provisi membengkak</div>
+  <div class="stress-verdict"><span class="sv-bad">RENTAN</span></div>
+</div>
+<div class="stress-row">
+  <div class="stress-label">Krisis perbankan sistemik</div>
+  <div class="stress-impact neg">Bank run, tekanan likuiditas</div>
+  <div class="stress-verdict"><span class="sv-warn">BACKING NEGARA — LCR & CAR masih cukup</span></div>
+</div>
+
+<div class="box orange">
+  <div class="box-title">Verdict Ketahanan Krisis: MAMPU BERTAHAN TAPI TERTEKAN</div>
+  BRI tidak akan bangkrut. Dukungan negara memastikan itu. Tapi profitabilitas bisa tertekan signifikan jika krisis berlanjut. Skenario NPL 5% adalah skenario ekstrem yang bisa membuat laba nyaris nol — dan ini tidak absurd jika daya beli UMKM terus merosot 12–18 bulan ke depan. BRI pernah melewati pandemi 2020 (laba turun 53%) dan pulih — tapi butuh 2 tahun untuk kembali ke level sebelumnya.
+</div>
+
+
+<!-- SECTION 13 -->
+<h2>13 — Katalis Positif</h2>
+
+<ul>
+  <li class="green"><strong>Recovery Q1 2026 sangat kuat (+13,7% YoY):</strong> Ini merupakan reversal dari tren negatif 2025. Jika tren berlanjut, konsensus laba 2026 Rp60–65 T bisa tercapai. Confidence naik.</li>
+  <li class="green"><strong>Cost of Fund turun dari 3% ke 2,3%:</strong> Ini driver utama kenaikan laba Q1 2026. Suku bunga BI yang cenderung turun ke depan akan terus membantu CoF.</li>
+  <li class="green"><strong>Holding Ultra Mikro (Pegadaian + PNM):</strong> Ekosistem finansial UMKM terlengkap di Indonesia yang tidak dimiliki kompetitor manapun. Ini masih dalam tahap komersialisasi dan potensinya belum sepenuhnya tercapture.</li>
+  <li class="green"><strong>KUR Rp308 T plafon 2026:</strong> BRI sebagai penyalur terbesar mendapat aliran kredit berjaminan pemerintah. Ini mengurangi risiko kredit default karena ada subsidi bunga.</li>
+  <li class="green"><strong>Dividend yield 13–16%:</strong> Mengalahkan semua instrumen investasi konvensional. Bisa menarik kembali investor income-oriented jika harga stabil.</li>
+  <li class="green"><strong>BRImo 31,6 juta pengguna aktif:</strong> Platform digital terbesar di perbankan UMKM. Fee income digital akan terus tumbuh dan menjadi diversifikasi pendapatan penting.</li>
+  <li class="yellow"><strong>Penurunan suku bunga BI berlanjut:</strong> Setiap 25 bps penurunan BI Rate = CoF turun, NIM bisa naik, dan NPL UMKM berpotensi membaik karena cicilan lebih ringan.</li>
+  <li class="yellow"><strong>Normalisasi makro Indonesia:</strong> Jika Rupiah menguat ke Rp15.000–16.000 dan inflasi mereda, daya beli UMKM pulih dan NPL BRI turun otomatis.</li>
+  <li class="yellow"><strong>AgenBRILink 500.000+ sebagai "offline fintech":</strong> Penetrasi layanan keuangan ke pelosok yang belum terjangkau bank lain atau fintech. Ini adalah moat geografi yang nyata.</li>
+</ul>
+
+
+<!-- SECTION 14 -->
+<h2>14 — Risiko Utama (Diurutkan dari Paling Berbahaya)</h2>
+
+<ul>
+  <li class="red"><strong>1. NPL UMKM struktural tinggi dan berpotensi memburuk:</strong> NPL 3,31% dengan tren naik (2,78%→3,07%→3,31%) dalam 3 periode berturut-turut adalah sinyal struktural, bukan sementara. Daya beli UMKM yang melemah akibat inflasi, Rupiah lemah, dan pengetatan fiskal adalah ancaman langsung ke kualitas kredit BRI. Jika NPL tembus 4–5%, laba bisa collapse.</li>
+  <li class="red"><strong>2. Risiko daya beli segmen UMKM:</strong> BRI lebih sensitif dari bank manapun terhadap kondisi ekonomi akar rumput. Krisis saat ini — inflasi, Rupiah lemah, daya beli tergerus — menyerang langsung segmen inti BRI. Tidak ada quick fix untuk ini.</li>
+  <li class="red"><strong>3. Payout dividen 92% mengurangi buffer modal:</strong> CAR turun dari 26,6% ke 22%. Jika provisi harus ditingkatkan agresif untuk mengantisipasi NPL, dan CAR mendekati 17–18%, BRI mungkin perlu rights issue lagi — yang dilutif.</li>
+  <li class="orange"><strong>4. Risiko interferensi pemerintah/Danantara:</strong> Sebagai BUMN, kepentingan pemegang saham publik tidak selalu sejalan dengan kepentingan pemegang saham negara. Program kebijakan (KUR, FLPP, bansos channeling) bisa menggerus profitabilitas untuk tujuan politis.</li>
+  <li class="orange"><strong>5. LDR 87,7% membatasi ekspansi:</strong> Mendekati batas nyaman. Jika DPK tidak tumbuh cukup, BRI tidak bisa tumbuh kredit 13% seperti Q1 2026 secara berkelanjutan.</li>
+  <li class="yellow"><strong>6. NIM compression dari suku bunga turun:</strong> Saat BI turun, NIM mikro masih tinggi tapi yield aset produktif lain (SBN, korporasi) turun. NIM bisa kembali ke 7% atau di bawah.</li>
+  <li class="yellow"><strong>7. Capital outflow dan tekanan asing:</strong> Kepemilikan asing ~20% masih bisa terus keluar jika sentimen Indonesia memburuk.</li>
+  <li class="yellow"><strong>8. Pergantian manajemen:</strong> Hery Gunardi baru di kursi Dirut. Strategi bisa berubah dan eksekusi jangka pendek belum teruji.</li>
+  <li><strong>9. Kompetisi digital dari fintech P2P dan neobank:</strong> Nasabah muda UMKM mulai beralih ke GoPay, OVO, Modalku, KoinWorks. BRI masih dominan tapi tren ini perlu diwaspadai jangka panjang.</li>
+  <li><strong>10. Risiko cuaca ekstrem dan gagal panen:</strong> Petani dan nelayan adalah kelompok besar debitur. Cuaca ekstrem langsung berdampak pada kredit macet pertanian.</li>
+</ul>
+
+
+<!-- SECTION 15 -->
+<h2>15 — Red Flags</h2>
+
+<div class="box red">
+  <div class="box-title">🚨 Daftar Tanda Bahaya BBRI</div>
+</div>
+
+<ul>
+  <li class="red"><strong>NPL gross naik 3 periode berturut-turut (2,78%→3,07%→3,31%):</strong> Ini bukan noise. Ini tren. Tiga data point berturut-turut adalah konfirmasi. Kredit bermasalah sedang bertumbuh.</li>
+  <li class="red"><strong>Laba turun di 2025 (-6,5% YoY) meski NII tumbuh:</strong> Ini berarti provisi memakan seluruh pertumbuhan NII. Kualitas laba dipertanyakan ketika "laba operasional membaik tapi laba bersih turun."</li>
+  <li class="red"><strong>Payout dividen 92% dari laba saat kualitas kredit memburuk:</strong> Ini counter-intuitive dari perspektif manajemen risiko konservatif. Buffer modal mengecil saat buffer dibutuhkan lebih banyak.</li>
+  <li class="red"><strong>LAR 9,7% = Rp152 T kredit berisiko:</strong> Ini adalah "potensi bom" jika makro memburuk. LAR Coverage 55% artinya jika LAR jadi NPL, ada ~Rp68 T yang belum ter-cover pencadangan.</li>
+  <li class="orange"><strong>Pengalihan aset ke Danantara:</strong> Transparansi Danantara masih rendah. Pengalihan BRI-MI dan PNM-IM ke entitas baru tanpa track record adalah tanda tanya governance.</li>
+  <li class="orange"><strong>CAR turun dari 26,6% (2024) ke 22% (2026):</strong> Turun 4,6 poin persentase hanya dalam 2 tahun akibat kombinasi pertumbuhan RWA dan payout dividen tinggi. Tren ini tidak boleh berlanjut.</li>
+  <li class="yellow"><strong>Beban provisi masih tinggi:</strong> CoC 3,2% di Q1 2026 sudah di batas atas panduan manajemen 2,9–3,2%. Artinya hampir tidak ada buffer.</li>
+</ul>
+
+
+<!-- SECTION 16 -->
+<h2>16 — Green Flags</h2>
+
+<ul>
+  <li class="green"><strong>Q1 2026 turnaround kuat (+13,7% YoY laba):</strong> Setelah 2025 yang suram, ini sinyal pemulihan yang nyata. Didorong CoF turun (3%→2,3%) dan NIM naik (ke 8,2%).</li>
+  <li class="green"><strong>NIM 8,2% tertinggi di KBMI-4:</strong> Keunggulan struktural dari segmen mikro yang tidak bisa ditandingi bank lain dalam jangka pendek.</li>
+  <li class="green"><strong>LAR turun dari 11,1% ke 9,7%:</strong> Tren perbaikan kualitas kredit secara keseluruhan, walau NPL gross masih naik.</li>
+  <li class="green"><strong>CASA tumbuh 13,2% YoY ke Rp1.058 T:</strong> Pertumbuhan dana murah yang kuat dan akselerasi. CoF turun menjadi buktinya.</li>
+  <li class="green"><strong>Total kredit tumbuh 13,7% YoY:</strong> Akselerasi signifikan dari 7% di 2024. Momentum bisnis menguat.</li>
+  <li class="green"><strong>Ekuitas Rp345 T (+12,8% YoY), Tier 1 +15,2%:</strong> Permodalan sebenarnya masih tumbuh, meski CAR turun karena pertumbuhan aset lebih cepat.</li>
+  <li class="green"><strong>Holding UMi — ekosistem tak tertandingi:</strong> BRI + Pegadaian + PNM = satu-satunya ekosistem finansial UMKM komprehensif di Indonesia. Ini moat jangka panjang.</li>
+  <li class="green"><strong>BRImo 31,6 juta pengguna + AgenBRILink 500.000+:</strong> Infrastruktur digital dan agen terbesar. Penetrasi yang susah ditiru.</li>
+  <li class="green"><strong>Valuasi di PBV 1,1x mendekati book value:</strong> Secara historis, ini level beli yang kuat untuk bank fundamental solid.</li>
+  <li class="green"><strong>Backing negara + program KUR Rp308 T:</strong> Kredit berjaminan pemerintah mengurangi risiko NPL untuk porsi KUR. BRI tidak bisa "dibiarkan gagal" oleh pemerintah.</li>
+</ul>
+
+
+<!-- SECTION 17 -->
+<h2>17 — Analisis Masa Depan</h2>
+
+<h3>Proyeksi 1 Tahun (2026)</h3>
+<ul>
+  <li>Jika momentum Q1 2026 berlanjut, laba 2026 bisa mencapai Rp60–65 T — kembali ke level 2023–2024.</li>
+  <li>Kunci: apakah NPL 3,31% stabil atau naik terus? Jika stabil dan CoC kembali ke 2,9%, laba bisa lebih tinggi.</li>
+  <li>NIM 8,2% bisa bertahan jika BI tidak agresif turunkan suku bunga sambil BRI ekspansif di segmen mikro.</li>
+  <li>Harga saham: jika laba kembali ke Rp60 T dan PBV rerating ke 1,5–1,6x, harga bisa ke Rp3.300–3.500 dalam 12 bulan.</li>
+</ul>
+
+<h3>Proyeksi 3 Tahun (2028)</h3>
+<ul>
+  <li>Holding UMi (Pegadaian + PNM) akan mulai memberikan kontribusi lebih signifikan ke laba konsolidasi.</li>
+  <li>Penetrasi BRImo ke segmen muda UMKM akan meningkatkan fee income dan loyalitas nasabah.</li>
+  <li>Laba bisa mencapai Rp70–80 T jika makro Indonesia normalisasi.</li>
+  <li>PBV rerating ke 1,8–2,0x bisa mendorong harga ke Rp4.000–4.400.</li>
+</ul>
+
+<h3>Proyeksi 5 Tahun (2030)</h3>
+<ul>
+  <li>BRI akan tetap menjadi lembaga keuangan paling kritis bagi UMKM Indonesia yang merupakan 99% unit usaha nasional.</li>
+  <li>Sektor UMKM Indonesia diproyeksikan terus berkontribusi 60%+ terhadap PDB — BRI adalah enabler utamanya.</li>
+  <li>Risiko jangka panjang: disrupsi digital yang massif dari platform non-bank dapat mengurangi relevansi jaringan fisik BRI.</li>
+  <li>Mitigasinya: transformasi digital (BRImo, BRILink) dan holding UMi adalah jawaban. Tapi eksekusi harus konsisten.</li>
+</ul>
+
+<div class="box blue">
+  <div class="box-title">Yang Harus Dipantau Setiap Kuartal</div>
+  NPL gross dan CoC adalah dua indikator terpenting. Jika keduanya membaik secara bersamaan, laba akan melonjak dan valuasi akan rerating. Jika NPL tembus 4% dan CoC melebihi 3,5%, exit dan tunggu di pinggir.
+</div>
+
+
+<!-- SECTION 18 -->
+<h2>18 — Kesimpulan Akhir</h2>
+
+<div class="box orange" style="margin-bottom:16px">
+  <div class="box-title">Keputusan Investasi</div>
+  <div style="margin-top:6px">
+    <span class="verdict specbuy">SPECULATIVE BUY / ACCUMULATE BERTAHAP</span>
+  </div>
+  <p style="margin-top:10px;margin-bottom:0">BBRI di Rp2.600 adalah saham berisiko-tinggi dengan potensi return yang sangat besar. Bukan untuk investor konservatif. Untuk investor yang paham siklus UMKM, toleran terhadap volatilitas, dan punya horizon 2–3 tahun, ini adalah posisi yang memiliki asimetri risiko-reward yang menarik. Tapi ini bukan BBCA — risikonya lebih nyata dan lebih dekat.</p>
+</div>
+
+<div class="tbl-wrap">
+<table>
+  <tr><th>Parameter</th><th>Detail</th></tr>
+  <tr><td>Harga Saat Ini</td><td>Rp2.600 per saham (penutupan 8 Jun 2026)</td></tr>
+  <tr><td>Valuasi Wajar (Base Case)</td><td>Rp3.300–4.000 (12–18 bulan)</td></tr>
+  <tr><td>Valuasi Wajar (Bull Case)</td><td>Rp4.400–4.800 (24–36 bulan)</td></tr>
+  <tr><td>Book Value per Saham</td><td>~Rp2.200</td></tr>
+  <tr><td>Margin of Safety (vs Base)</td><td>~27–54%</td></tr>
+  <tr><td>Dividend Yield (2025)</td><td>~13% (Rp344/saham vs harga Rp2.600)</td></tr>
+  <tr><td>Risiko Terbesar</td><td>NPL UMKM terus memburuk, CoC melebihi panduan, laba turun tajam lagi</td></tr>
+  <tr><td>Risiko Kedua</td><td>Interferensi Danantara/pemerintah yang ekstraktif (payout tinggi, capex terbatas)</td></tr>
+  <tr><td>Horizon Ideal</td><td>Minimum 2 tahun; entry secara bertahap (DCA)</td></tr>
+</table>
+</div>
+
+<h3>Syarat Agar BBRI Layak Dibeli</h3>
+<ul>
+  <li class="green">NPL gross tidak tembus 4% dalam 2 kuartal ke depan</li>
+  <li class="green">CoC kembali ke 2,9% atau di bawah target panduan manajemen</li>
+  <li class="green">Laba 2026 annualized kembali ke >Rp60 T</li>
+  <li class="green">Investor menggunakan uang dingin, tidak bermargin, horizon 2–3 tahun</li>
+  <li class="green">Paham bahwa dividen yield tinggi bisa tidak berkelanjutan jika laba turun</li>
+  <li class="green">Melihat Holding UMi sebagai aset strategis jangka panjang, bukan hasil cepat</li>
+</ul>
+
+<h3>Syarat BBRI Harus Dihindari / Exit</h3>
+<ul>
+  <li class="red">NPL gross menembus 4% dan CoC melebihi 3,5% selama 2 kuartal berturut-turut</li>
+  <li class="red">Laba bersih turun >20% YoY dan tidak ada sinyal pemulihan</li>
+  <li class="red">Danantara melakukan divestasi saham besar-besaran (tekanan jual masif)</li>
+  <li class="red">Pemerintah memaksa payout >90% saat kualitas kredit memburuk — sinyal ekstraksi value</li>
+  <li class="red">Investor butuh dana dalam 6–12 bulan ke depan atau tidak tahan drawdown</li>
+  <li class="red">CAR turun di bawah 18% tanpa ada rights issue yang dikomunikasikan</li>
+</ul>
+
+
+<!-- SECTION 19 -->
+<h2>19 — Checklist Investor</h2>
+
+<h3>✅ Layak Dipertimbangkan Jika:</h3>
+<div class="checklist-item"><div class="ci-icon">✅</div><div class="ci-text">Investor dengan horizon 2–3 tahun+ yang memahami siklus kredit UMKM dan sabar menunggu normalisasi makro</div></div>
+<div class="checklist-item"><div class="ci-icon">✅</div><div class="ci-text">Mencari dividen yield 13–16% yang jauh mengalahkan deposito (4–5%) sambil menunggu capital gain</div></div>
+<div class="checklist-item"><div class="ci-icon">✅</div><div class="ci-text">Percaya bahwa recovery Q1 2026 (+13,7% laba) adalah awal tren pemulihan, bukan anomali</div></div>
+<div class="checklist-item"><div class="ci-icon">✅</div><div class="ci-text">Mau accumulate secara bertahap (DCA bulanan) untuk mengurangi risiko timing yang salah</div></div>
+<div class="checklist-item"><div class="ci-icon">✅</div><div class="ci-text">Melihat Holding UMi (Pegadaian + PNM) sebagai aset yang belum dioptimalkan — potensi upside tambahan</div></div>
+<div class="checklist-item"><div class="ci-icon">✅</div><div class="ci-text">PBV 1,1–1,2x mendekati book value adalah level pembelian yang secara historis memberikan return positif untuk bank fundamental solid</div></div>
+
+<h3>❌ Harus Dihindari Jika:</h3>
+<div class="checklist-item"><div class="ci-icon">❌</div><div class="ci-text">Butuh dana dalam 12 bulan ke depan — risiko penurunan harga lebih lanjut sangat nyata</div></div>
+<div class="checklist-item"><div class="ci-icon">❌</div><div class="ci-text">Tidak tahan melihat kerugian unrealized 20–30% lagi sebelum saham berbalik</div></div>
+<div class="checklist-item"><div class="ci-icon">❌</div><div class="ci-text">Menyamakan BBRI dengan BBCA — risikonya berbeda jauh karena segmen yang dilayani sangat berbeda</div></div>
+<div class="checklist-item"><div class="ci-icon">❌</div><div class="ci-text">Menggunakan leverage/margin — kombinasi volatilitas BBRI + margin = resep bencana</div></div>
+<div class="checklist-item"><div class="ci-icon">❌</div><div class="ci-text">Berharap recovery cepat dalam 3–6 bulan — tidak ada katalis jangka pendek yang kuat dan pasti</div></div>
+
+<h3>📊 Data Wajib Dipantau Setiap Kuartal:</h3>
+<div class="checklist-item"><div class="ci-icon">📊</div><div class="ci-text">NPL Gross: harus stabil atau turun. Jika naik lagi ke >3,5%, red alert. Jika turun ke <3%, sinyal sangat positif.</div></div>
+<div class="checklist-item"><div class="ci-icon">📊</div><div class="ci-text">Cost of Credit (CoC): harus di 2,9–3,2% sesuai panduan. Jika melebihi 3,5%, provisi akan memakan laba.</div></div>
+<div class="checklist-item"><div class="ci-icon">📊</div><div class="ci-text">NIM: harus bertahan di 7,5%+. Jika turun ke bawah 7%, model bisnis mikro mulai tererodir.</div></div>
+<div class="checklist-item"><div class="ci-icon">📊</div><div class="ci-text">Pertumbuhan laba YoY: harus positif. Dua kuartal negatif berturut-turut = evaluasi ulang posisi.</div></div>
+<div class="checklist-item"><div class="ci-icon">📊</div><div class="ci-text">LAR (Loan at Risk): harus turun dari 9,7%. Target manajemen <9% di akhir 2026.</div></div>
+<div class="checklist-item"><div class="ci-icon">📊</div><div class="ci-text">CAR: jangan sampai turun di bawah 19%. Jika mendekati 18%, ada potensi rights issue dilutif.</div></div>
+<div class="checklist-item"><div class="ci-icon">📊</div><div class="ci-text">Kebijakan Danantara terkait BBRI: apakah ada divestasi, transfer aset, atau tekanan payout lebih lanjut.</div></div>
+
+
+<!-- FOOTER -->
+<div class="footer">
+  <p style="margin-bottom:8px">SUMBER DATA UTAMA:</p>
+  <p>Annual Report BRI 2024 (ir-bri.com/AR2024) · BRI Lapkeu Q1 2025 (ir-bri.com/pdf) · Siaran Pers BRI Q1 2026 (Kompas, 30 Apr 2026) · Kontan Apr 2026 · Bareksa Apr–Mei 2026 · Bisnis.com Feb 2025 · GoodStats Jul 2025 · Pluang.com Mei 2026 · Samuel Sekuritas Mar 2026 · Stockbro.id Jun 2026 · Investortrust.id · Indopremier · Babelinsight.id</p>
+  <p style="margin-top:12px;color:var(--accent)">DATA YANG TIDAK TERSEDIA: Data NIM tahunan 2020–2022 yang presisi tidak ditemukan dalam sumber publik dan tidak dikarang. Angka 2021 diperkirakan dari kisaran yang tersedia. Total aset 2020–2023 menggunakan estimasi berdasarkan tren yang tersedia.</p>
+  <p style="margin-top:16px;font-size:11px;color:var(--text-dim)">Analisis ini dibuat pada 8 Juni 2026. Harga penutupan BBRI Rp2.600/lembar sebagaimana dinyatakan investor. Data pasar berubah setiap hari.</p>
+  <p style="margin-top:12px;padding:10px;background:var(--surface2);border-radius:4px;font-size:12px">
+    "Kesimpulan ini bukan ajakan beli/jual, tapi bahan analisis. Keputusan tetap harus mempertimbangkan profil risiko, horizon waktu, dan strategi masing-masing investor."
+  </p>
+</div>
+
+</body>
+</html>
